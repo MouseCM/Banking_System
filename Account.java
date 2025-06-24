@@ -1,38 +1,29 @@
-public class Account {
-    private String email;
-    private String password;
+
+
+public abstract class Account {
     private String accountNumber;
-    private int balance;
+    private double balance;
 
     public Account() {
-        this.email = "";
-        this.password = "";
         this.accountNumber = "";
         this.balance = 0;
     }
 
-    public Account(String email, String password, String accountNumber, int balance) {
-        this.email = email;
-        this.password = password;
+    public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public String getAccountnumber() {
-        return this.accountNumber;
-    }
-
-    public int getBalance() {
-        return this.balance;
+    public double doWithdraw(double amount) {
+        this.balance -= amount;
+        return amount;
     }
 
 
+    public String getAccountnumber() { return this.accountNumber; }
+    public double getBalance() { return this.balance; }
+
+    abstract double withdraw(double amount) throws NotEnoughMoneyException;
+
+    abstract double deposit(double amount);
 }

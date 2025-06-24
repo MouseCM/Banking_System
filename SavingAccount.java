@@ -1,19 +1,33 @@
 public class SavingAccount extends Account {
-    private int savingBalance;
     private float interestRate;
 
     public SavingAccount() {
         super();
-        savingBalance = 0;
+        interestRate = 0;
+    }
+
+    public SavingAccount(String accountNumber, double balance) {
+        super(accountNumber, balance);
         interestRate = 0;
     }
 
 
-    public int getSavingBalance() {
-        return this.savingBalance;
+    public float getInterestRate() { return this.interestRate; }
+
+    @Override
+    public double withdraw(double amount) throws NotEnoughMoneyException {
+        if(this.getBalance() >= amount) {
+            doWithdraw(amount);
+        }
+        else {
+            throw new NotEnoughMoneyException(this.getBalance(), amount);
+        }
+
+        return amount;
     }
 
-    public float getInterestRate() {
-        return this.interestRate;
+    @Override
+    public double deposit(double amount) {
+        return 1;
     }
 }
