@@ -1,3 +1,5 @@
+package Banking_System;
+
 public class SavingAccount extends Account {
     private float interestRate;
 
@@ -28,6 +30,7 @@ public class SavingAccount extends Account {
 
     @Override
     public double deposit(double amount) {
-        return 1;
+        doDeposit(amount);
+        return amount;
     }
 }

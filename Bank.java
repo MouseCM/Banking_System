@@ -1,3 +1,5 @@
+package Banking_System;
+
 import java.util.*;
 
 public class Bank {
@@ -19,14 +21,22 @@ public class Bank {
         return newCustomer;
     }
 
-    public Customer login(String email, String password) {
+    public Customer login(String email, String password) throws InvalidUserException {
         for(Customer customer : customers) {
             if(customer.getEmail() == email && customer.getPassword() == password) {
                 return customer;
             }
         }
 
-        return null;
+        throw new InvalidUserException();
+    }
+
+    public void tranfer(Account sender, Account reciever, double amount) throws NotEnoughMoneyException {
+        if(sender.getBalance() < amount) {
+            throw new NotEnoughMoneyException(sender.getBalance(), amount);
+        }
+        sender.sendMoney(reciever.getAccountnumber(), -amount);
+        reciever.recieveMoney(sender.getAccountnumber(), amount);
     }
 
 }
